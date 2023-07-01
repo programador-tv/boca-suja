@@ -6,8 +6,6 @@ ARG PROJECT_NAME
 
 WORKDIR /app
 
-COPY ./Domain/ ./Domain/
-COPY ./Infrastructure/Data ./Infrastructure/Data
 
 COPY ${PROJECT_PATH} ${PROJECT_PATH}
 
