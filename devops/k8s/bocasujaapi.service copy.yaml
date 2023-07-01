@@ -4,7 +4,7 @@ metadata:
   name: bocasujaapi
   namespace: default
 spec:
-  type: ClusterIP
+  type: LoadBalancer
   selector:
     app: bocasujaapi
   ports:
