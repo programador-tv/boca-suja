@@ -6,8 +6,7 @@ ARG PROJECT_NAME
 
 WORKDIR /app
 
-
-COPY ${PROJECT_PATH} ${PROJECT_PATH}
+COPY . .
 
 RUN dotnet publish ${PROJECT_PATH}/${PROJECT_NAME}.csproj -c release -o /out
 
