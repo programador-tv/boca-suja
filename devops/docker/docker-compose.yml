@@ -1,7 +1,7 @@
 version: '3.1'
 
 services:
-  liveapi:
+  bocasujaapi:
    image: ghcr.io/programador-tv/bocasujaapi
    container_name: bocasujaapi
    restart: always
@@ -9,7 +9,7 @@ services:
     - 8001:80
    build: 
     context: ../../
-    dockerfile: ./devops/Docker/dockerfile.aspnet
+    dockerfile: ./devops/docker/dockerfile.aspnet
     args:
       - PROJECT_NAME=Web.Api.BocaSuja
       - PROJECT_PATH=./Apps/Web.Api.BocaSuja
