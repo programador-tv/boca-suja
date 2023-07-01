@@ -1,0 +1,29 @@
+# https://hub.docker.com/_/microsoft-dotnet
+FROM mcr.microsoft.com/dotnet/sdk:8.0.100-preview.4-bookworm-slim-amd64 AS build
+
+ARG PROJECT_PATH
+ARG PROJECT_NAME
+
+WORKDIR /app
+
+COPY ./Domain/ ./Domain/
+COPY ./Infrastructure/Data ./Infrastructure/Data
+
+COPY ${PROJECT_PATH} ${PROJECT_PATH}
+
+RUN dotnet publish ${PROJECT_PATH}/${PROJECT_NAME}.csproj -c release -o /out
+
+
+# final stage/image
+FROM mcr.microsoft.com/dotnet/aspnet:8.0.0-preview.4-bookworm-slim-amd64
+
+ARG PROJECT_PATH
+ARG PROJECT_NAME
+ARG USE_FFMPEG
+
+WORKDIR /app
+COPY --from=build /out ./
+
+ENV ENV_PROJECT_NAME "./${PROJECT_NAME}"
+
+CMD $ENV_PROJECT_NAME
