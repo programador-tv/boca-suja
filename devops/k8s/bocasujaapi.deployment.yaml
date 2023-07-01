@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bocasujaapi
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bocasujaapi
+  template:
+    metadata:
+      labels:
+        app: bocasujaapi
+    spec:
+      containers:
+      - name: bocasujaapi
+        image: ghcr.io/programador-tv/bocasujaapi:latest
+        ports:
+        - containerPort: 80
+        env:
+        - name: ASPNETCORE_URLS
+          value: http://*:80
+      imagePullSecrets:
+      - name: ghcr-credentials
