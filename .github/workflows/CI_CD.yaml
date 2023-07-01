@@ -97,7 +97,7 @@ jobs:
   update_docker:
     runs-on: ubuntu-latest
     needs: [code_quality]
-    if: github.ref == 'refs/heads/master'
+    if: github.ref == 'refs/heads/main'
 
     steps:
     - uses: actions/checkout@v3
