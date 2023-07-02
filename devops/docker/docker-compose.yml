@@ -15,3 +15,12 @@ services:
       - PROJECT_PATH=./Apps/Web.Api.BocaSuja
    env_file:
     - envs/aspnet.env
+  db:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    restart: always
+    environment:
+      ACCEPT_EULA: y
+      SA_PASSWORD: FakeStrong@Passw0rd
+      MSSQL_PID: Express
+    ports: 
+    - 1433:1433
