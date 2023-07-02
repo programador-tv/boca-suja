@@ -6,7 +6,7 @@ services:
     restart: always
     environment:
       ACCEPT_EULA: y
-      SA_PASSWORD: SECRET
+      SA_PASSWORD: FakeStrong@Passw0rd
       MSSQL_PID: Express
     ports: 
     - 1433:1433
