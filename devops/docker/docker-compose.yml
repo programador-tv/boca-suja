@@ -18,9 +18,11 @@ services:
   db:
     image: mcr.microsoft.com/mssql/server:2022-latest
     restart: always
+    env_file:
+      - envs/sqlserver.env
     environment:
-      ACCEPT_EULA: y
-      SA_PASSWORD: FakeStrong@Passw0rd
-      MSSQL_PID: Express
-    ports: 
+      ACCEPT_EULA: ${ACCEPT_EULA}
+      SA_PASSWORD: ${SA_PASSWORD}
+      MSSQL_PID: ${MSSQL_PID} 
+    ports:
     - 1433:1433
