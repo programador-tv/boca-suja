@@ -8,7 +8,7 @@ public class IncidenciaTest
     [Test, Category("Domain - Entidade - Incidencia")]
     [TestCase("Comentário em video", "Sexual", 0)]
     [TestCase("Título do vídeo", "Ódio", 1)]
-    [TestCase("Descrição do video", "Violência", 2)]
+    [TestCase("Descrição do video", "Violência", 3)]
     [Description("Verifica se a entidade Incidência é instanciada corretamente.")]
     public void InstantiateIncidencia_ShouldInstantiate(
         string validRecurso,
