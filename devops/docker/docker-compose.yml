@@ -20,9 +20,5 @@ services:
     restart: always
     env_file:
       - envs/sqlserver.env
-    environment:
-      ACCEPT_EULA: ${ACCEPT_EULA}
-      SA_PASSWORD: ${SA_PASSWORD}
-      MSSQL_PID: ${MSSQL_PID} 
     ports:
     - 1433:1433
