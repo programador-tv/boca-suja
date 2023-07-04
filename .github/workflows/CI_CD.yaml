@@ -7,6 +7,7 @@ on:
   pull_request:
     branches:
       - main
+      - jeancorreia-feature-starting-model
     types: [opened, synchronize, reopened]
 
 jobs:

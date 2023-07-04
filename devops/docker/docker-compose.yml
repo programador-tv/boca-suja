@@ -15,3 +15,10 @@ services:
       - PROJECT_PATH=./Apps/Web.Api.BocaSuja
    env_file:
     - envs/aspnet.env
+  db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    restart: always
+    env_file:
+      - envs/sqlserver.env
+    ports:
+    - 1433:1433
