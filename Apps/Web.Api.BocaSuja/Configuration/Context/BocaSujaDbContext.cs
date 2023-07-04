@@ -6,19 +6,17 @@ namespace Web.Api.BocaSuja.Configuration.Context;
 
 public class BocaSujaDbContext : DbContext
 {
-  public BocaSujaDbContext(DbContextOptions<BocaSujaDbContext> options) : base(options)
-  {
+    public BocaSujaDbContext(DbContextOptions<BocaSujaDbContext> options)
+        : base(options) { }
 
-  }
+    public DbSet<Incidencia> Incidencias { get; set; }
 
-  public DbSet<Incidencia> Incidencias { get; set; }
+    private readonly IncidenciaDbMapping IncidenciaMapping = new();
 
-  private readonly IncidenciaDbMapping IncidenciaMapping = new();
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
 
-  protected override void OnModelCreating(ModelBuilder modelBuilder)
-  {
-    base.OnModelCreating(modelBuilder);
-
-    IncidenciaMapping.Build(modelBuilder);
-  }
+        IncidenciaMapping.Build(modelBuilder);
+    }
 }
