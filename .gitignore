@@ -476,7 +476,5 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-.sonarlint
-
 appsettings.json
 appsettings.Development.json

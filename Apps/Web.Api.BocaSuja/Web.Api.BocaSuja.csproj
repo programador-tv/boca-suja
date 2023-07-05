@@ -1,10 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <ItemGroup>
-    <AdditionalFiles Include="..\..\.sonarlint\programador-tv_boca-suja\CSharp\SonarLint.xml" Link="SonarLint.xml" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.0-preview.5.23280.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.0-preview.5.23280.1">
       <PrivateAssets>all</PrivateAssets>
@@ -25,7 +21,6 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <CodeAnalysisRuleSet>..\..\.sonarlint\programador-tv_boca-sujacsharp.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
 </Project>
