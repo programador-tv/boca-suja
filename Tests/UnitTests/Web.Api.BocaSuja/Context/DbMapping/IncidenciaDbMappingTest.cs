@@ -7,7 +7,6 @@ namespace Tests.UnitTests.Web.Api.BocaSuja.Context.DbMapping;
 [TestFixture]
 public class IncidenciaDbMappingTest
 {
-
     private ModelBuilder _modelBuilder;
     private IncidenciaDbMapping _incidenciaDbMapping;
 
