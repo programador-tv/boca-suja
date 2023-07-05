@@ -1,7 +1,7 @@
 ﻿using Core.BocaSuja.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Web.Api.BocaSuja.Configuration.Context.DbMapping;
+namespace Web.Api.BocaSuja.Context.DbMapping;
 
 public class IncidenciaDbMapping
 {

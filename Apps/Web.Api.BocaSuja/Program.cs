@@ -1,6 +1,6 @@
 using Core.BocaSuja;
 using Microsoft.EntityFrameworkCore;
-using Web.Api.BocaSuja.Configuration.Context;
+using Web.Api.BocaSuja.Context;
 
 var builder = WebApplication.CreateBuilder(args);
 

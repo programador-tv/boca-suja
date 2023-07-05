@@ -5,7 +5,7 @@ namespace Tests.UnitTests.Core.BocaSuja.Domain.Entities;
 [TestFixture]
 public class IncidenciaTest
 {
-    [Test, Category("Domain - Entidade - Incidencia")]
+    [Test, Category("Core - Domain - Entidade - Incidencia")]
     [TestCase("Comentário em video", "Sexual", 0)]
     [TestCase("Título do vídeo", "Ódio", 1)]
     [TestCase("Descrição do video", "Violência", 3)]

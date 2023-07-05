@@ -1,8 +1,8 @@
 ﻿using Core.BocaSuja.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using Web.Api.BocaSuja.Configuration.Context.DbMapping;
+using Web.Api.BocaSuja.Context.DbMapping;
 
-namespace Web.Api.BocaSuja.Configuration.Context;
+namespace Web.Api.BocaSuja.Context;
 
 public class BocaSujaDbContext : DbContext
 {
