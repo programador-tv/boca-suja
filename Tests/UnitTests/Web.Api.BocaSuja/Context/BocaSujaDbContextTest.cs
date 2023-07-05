@@ -1,4 +1,5 @@
 ﻿using Core.BocaSuja.Domain.Entities;
+using Core.BocaSuja.Domain.Enums;
 using Microsoft.EntityFrameworkCore;
 using Web.Api.BocaSuja.Context;
 
@@ -18,20 +19,23 @@ public class BocaSujaDbContextTest
     }
 
     [Test, Category("WebApi - Context - BocaSujaDbContext")]
-    [TestCase("Comentário em video", "Sexual", 0)]
-    [TestCase("Título do vídeo", "Ódio", 1)]
-    [TestCase("Descrição do video", "Violência", 3)]
+    [TestCase("Comentário em video", TipoDeIncidenciaEnum.SEXUAL, 0)]
+    [TestCase("Título do vídeo", TipoDeIncidenciaEnum.SELFHARM, 1)]
+    [TestCase("Descrição do video", TipoDeIncidenciaEnum.HATE, 2)]
+    [TestCase("Descrição do video", TipoDeIncidenciaEnum.VIOLENCE, 3)]
     [Description("Verifica a instancia do banco em memória e a persistencia de alguns dados.")]
-    public void InstantiateDbContext(string validRecurso, string validTipo, int validGravidade)
+    public void InstantiateDbContext(string validRecurso, TipoDeIncidenciaEnum validTipo, int validGravidade)
     {
         using var dbContext = new BocaSujaDbContext(_options);
         var entidadeOfensoraGuid = Guid.NewGuid();
+        var textoExemplo = "Texto exemplo que será registrado em uma incidência.";
 
         var incidencia = new Incidencia(
             entidadeOfensoraGuid,
             validRecurso,
             validTipo,
-            validGravidade
+            validGravidade,
+            textoExemplo
         );
 
         dbContext.Incidencias.Add(incidencia);
@@ -52,6 +56,7 @@ public class BocaSujaDbContextTest
             Assert.That(actual: incidenciaPersistida?.Recurso, Is.EqualTo(incidencia.Recurso));
             Assert.That(actual: incidenciaPersistida?.Tipo, Is.EqualTo(incidencia.Tipo));
             Assert.That(actual: incidenciaPersistida?.Gravidade, Is.EqualTo(incidencia.Gravidade));
+            Assert.That(actual: incidenciaPersistida?.Texto, Is.EqualTo(incidencia.Texto));
             Assert.That(
                 actual: incidenciaPersistida?.DataHoraCriacao,
                 Is.EqualTo(incidencia.DataHoraCriacao)

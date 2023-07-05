@@ -47,9 +47,10 @@ public class IncidenciaDbMapping
             .HasColumnOrder(3)
             .HasColumnName("Tipo")
             .HasComment(
-                "Indica o tipo ou categoria da incidência. Pode ser usado para classificar as incidências de acordo com diferentes critérios."
+                "Indica o tipo ou categoria da incidência. Pode ser usado para classificar as incidências de acordo com diferentes critérios. " +
+                "\"1 - Ódio\" || \"2 - Auto-Mutilação\" || \"3 - Sexual\" || \"4 - Violencia\" "
             )
-            .HasColumnType("nvarchar(50)")
+            .HasColumnType("int")
             .IsRequired();
 
         builder
@@ -65,8 +66,19 @@ public class IncidenciaDbMapping
 
         builder
             .Entity<Incidencia>()
-            .Property(incidencia => incidencia.DataHoraCriacao)
+            .Property(incidencia => incidencia.Texto)
             .HasColumnOrder(5)
+            .HasColumnName("Texto")
+            .HasComment(
+                "Registra o texto que foi capturado pela incidência."
+            )
+            .HasColumnType("nvarchar(max)")
+            .IsRequired();
+
+        builder
+            .Entity<Incidencia>()
+            .Property(incidencia => incidencia.DataHoraCriacao)
+            .HasColumnOrder(6)
             .HasColumnName("Data_Hora_Criacao")
             .HasComment(
                 "Registra a data e hora em que a incidência foi criada. É usado para rastrear o momento em que a incidência ocorreu. É mapeado como uma coluna do tipo datetimeoffset."
