@@ -14,7 +14,10 @@ public class Tests
         var response = Health.Check();
         var ok = "OK";
 
-        Assert.That(response, Is.Not.Null);
-        Assert.That(actual: response, Is.EqualTo(ok));
+        Assert.Multiple(() =>
+        {
+            Assert.That(response, Is.Not.Null);
+            Assert.That(actual: response, Is.EqualTo(ok));
+        });
     }
 }
