@@ -19,14 +19,14 @@ public class BocaSujaDbContextTest
     }
 
     [Test, Category("WebApi - Context - BocaSujaDbContext")]
-    [TestCase("Comentário em video", TipoDeIncidenciaEnum.SEXUAL, 0)]
-    [TestCase("Título do vídeo", TipoDeIncidenciaEnum.SELFHARM, 1)]
-    [TestCase("Descrição do video", TipoDeIncidenciaEnum.HATE, 2)]
-    [TestCase("Descrição do video", TipoDeIncidenciaEnum.VIOLENCE, 3)]
+    [TestCase("Comentário em video", TipoDeIncidencia.SEXUAL, 0)]
+    [TestCase("Título do vídeo", TipoDeIncidencia.SELFHARM, 1)]
+    [TestCase("Descrição do video", TipoDeIncidencia.HATE, 2)]
+    [TestCase("Descrição do video", TipoDeIncidencia.VIOLENCE, 3)]
     [Description("Verifica a instancia do banco em memória e a persistencia de alguns dados.")]
     public void InstantiateDbContext(
         string validRecurso,
-        TipoDeIncidenciaEnum validTipo,
+        TipoDeIncidencia validTipo,
         int validGravidade
     )
     {

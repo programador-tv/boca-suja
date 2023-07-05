@@ -1,6 +1,6 @@
 ﻿namespace Core.BocaSuja.Domain.Enums;
 
-public enum TipoDeIncidenciaEnum
+public enum TipoDeIncidencia
 {
     HATE = 1,
     SELFHARM = 2,

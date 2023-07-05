@@ -7,14 +7,14 @@ namespace Tests.UnitTests.Core.BocaSuja.Domain.Entities;
 public class IncidenciaTest
 {
     [Test, Category("Core - Domain - Entidade - Incidencia")]
-    [TestCase("Comentário em video", TipoDeIncidenciaEnum.SEXUAL, 0)]
-    [TestCase("Título do vídeo", TipoDeIncidenciaEnum.SELFHARM, 1)]
-    [TestCase("Descrição do video", TipoDeIncidenciaEnum.HATE, 2)]
-    [TestCase("Descrição do video", TipoDeIncidenciaEnum.VIOLENCE, 3)]
+    [TestCase("Comentário em video", TipoDeIncidencia.SEXUAL, 0)]
+    [TestCase("Título do vídeo", TipoDeIncidencia.SELFHARM, 1)]
+    [TestCase("Descrição do video", TipoDeIncidencia.HATE, 2)]
+    [TestCase("Descrição do video", TipoDeIncidencia.VIOLENCE, 3)]
     [Description("Verifica se a entidade Incidência é instanciada corretamente.")]
     public void InstantiateIncidencia_ShouldInstantiate(
         string validRecurso,
-        TipoDeIncidenciaEnum validTipo,
+        TipoDeIncidencia validTipo,
         int validGravidade
     )
     {
