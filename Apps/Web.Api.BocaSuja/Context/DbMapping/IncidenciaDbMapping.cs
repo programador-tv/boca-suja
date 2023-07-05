@@ -47,8 +47,8 @@ public class IncidenciaDbMapping
             .HasColumnOrder(3)
             .HasColumnName("Tipo")
             .HasComment(
-                "Indica o tipo ou categoria da incidência. Pode ser usado para classificar as incidências de acordo com diferentes critérios. " +
-                "\"1 - Ódio\" || \"2 - Auto-Mutilação\" || \"3 - Sexual\" || \"4 - Violencia\" "
+                "Indica o tipo ou categoria da incidência. Pode ser usado para classificar as incidências de acordo com diferentes critérios. "
+                    + "\"1 - Ódio\" || \"2 - Auto-Mutilação\" || \"3 - Sexual\" || \"4 - Violencia\" "
             )
             .HasColumnType("int")
             .IsRequired();
@@ -69,9 +69,7 @@ public class IncidenciaDbMapping
             .Property(incidencia => incidencia.Texto)
             .HasColumnOrder(5)
             .HasColumnName("Texto")
-            .HasComment(
-                "Registra o texto que foi capturado pela incidência."
-            )
+            .HasComment("Registra o texto que foi capturado pela incidência.")
             .HasColumnType("nvarchar(max)")
             .IsRequired();
 

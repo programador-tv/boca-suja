@@ -24,7 +24,11 @@ public class BocaSujaDbContextTest
     [TestCase("Descrição do video", TipoDeIncidenciaEnum.HATE, 2)]
     [TestCase("Descrição do video", TipoDeIncidenciaEnum.VIOLENCE, 3)]
     [Description("Verifica a instancia do banco em memória e a persistencia de alguns dados.")]
-    public void InstantiateDbContext(string validRecurso, TipoDeIncidenciaEnum validTipo, int validGravidade)
+    public void InstantiateDbContext(
+        string validRecurso,
+        TipoDeIncidenciaEnum validTipo,
+        int validGravidade
+    )
     {
         using var dbContext = new BocaSujaDbContext(_options);
         var entidadeOfensoraGuid = Guid.NewGuid();

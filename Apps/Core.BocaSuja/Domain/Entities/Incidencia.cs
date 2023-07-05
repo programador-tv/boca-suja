@@ -13,11 +13,11 @@ public class Incidencia
     public DateTimeOffset DataHoraCriacao { get; private set; }
 
     public Incidencia(
-        Guid entidadeOfensora, 
+        Guid entidadeOfensora,
         string recurso,
         TipoDeIncidenciaEnum tipo,
         int gravidade,
-        string texto 
+        string texto
     )
     {
         Id = Guid.NewGuid();
