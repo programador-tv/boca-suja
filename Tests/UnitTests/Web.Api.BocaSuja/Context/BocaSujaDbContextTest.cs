@@ -65,6 +65,11 @@ public class BocaSujaDbContextTest
                 actual: incidenciaPersistida?.DataHoraCriacao,
                 Is.EqualTo(incidencia.DataHoraCriacao)
             );
+            Assert.That(
+                actual: incidenciaPersistida?.DataHoraAtualizacao,
+                Is.EqualTo(incidencia.DataHoraAtualizacao)
+            );
+            Assert.That(actual: incidenciaPersistida?.Inativo, Is.False);
         });
     }
 }

@@ -82,6 +82,33 @@ public class IncidenciaDbMapping
                 "Registra a data e hora em que a incidência foi criada. É usado para rastrear o momento em que a incidência ocorreu. É mapeado como uma coluna do tipo datetimeoffset."
             )
             .HasColumnType("datetimeoffset")
+            .ValueGeneratedOnAdd()
+            .HasDefaultValueSql("SYSUTCDATETIME()")
+            .IsRequired();
+
+        builder
+            .Entity<Incidencia>()
+            .Property(incidencia => incidencia.DataHoraAtualizacao)
+            .HasColumnOrder(7)
+            .HasColumnName("Data_Hora_Atualizacao")
+            .HasComment(
+                "Registra a data e hora em que a incidência foi atualizada. Usado para rastrear o momento em que a incidência foi atualizada. É mapeado como uma coluna do tipo datetimeoffset."
+            )
+            .HasColumnType("datetimeoffset")
+            .ValueGeneratedOnAddOrUpdate()
+            .HasDefaultValueSql("SYSUTCDATETIME()")
+            .IsRequired();
+
+        builder
+            .Entity<Incidencia>()
+            .Property(incidencia => incidencia.Inativo)
+            .HasColumnOrder(8)
+            .HasColumnName("Inativo")
+            .HasComment(
+                "Registra se a incidência está inativa ou não, é registrada como um valor 0 para ativo e 1 para inativo."
+            )
+            .HasColumnType("bit")
+            .HasDefaultValue(false)
             .IsRequired();
     }
 }

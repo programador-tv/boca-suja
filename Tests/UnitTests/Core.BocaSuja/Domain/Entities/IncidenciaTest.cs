@@ -20,10 +20,10 @@ public class IncidenciaTest
     {
         var dateTimeBefore = DateTimeOffset.Now.AddSeconds(-1);
         var textoExemplo = "Texto exemplo de uma incidência";
-        var validEntitadeOfensora = Guid.NewGuid();
+        var validEntidadeOfensora = Guid.NewGuid();
 
         var validIncidencia = new Incidencia(
-            validEntitadeOfensora,
+            validEntidadeOfensora,
             validRecurso,
             validTipo,
             validGravidade,
@@ -34,16 +34,19 @@ public class IncidenciaTest
 
         Assert.Multiple(() =>
         {
-            Assert.That(validIncidencia, Is.InstanceOf(typeof(Incidencia)));
-            Assert.That(validIncidencia, Is.Not.Null);
-            Assert.That(validIncidencia.Id, Is.InstanceOf(typeof(Guid)));
-            Assert.That(validEntitadeOfensora, Is.EqualTo(validIncidencia.EntidadeOfensora));
-            Assert.That(validRecurso, Is.EqualTo(validIncidencia.Recurso));
-            Assert.That(validTipo, Is.EqualTo(validIncidencia.Tipo));
-            Assert.That(validGravidade, Is.EqualTo(validIncidencia.Gravidade));
-            Assert.That(textoExemplo, Is.EqualTo(validIncidencia.Texto));
-            Assert.That(validIncidencia.DataHoraCriacao, Is.GreaterThan(dateTimeBefore));
-            Assert.That(validIncidencia.DataHoraCriacao, Is.LessThan(dateTimeAfter));
+            Assert.That(actual: validIncidencia, Is.InstanceOf(typeof(Incidencia)));
+            Assert.That(actual: validIncidencia, Is.Not.Null);
+            Assert.That(actual: validIncidencia.Id, Is.InstanceOf(typeof(Guid)));
+            Assert.That(actual: validIncidencia.EntidadeOfensora, Is.EqualTo(validEntidadeOfensora));
+            Assert.That(actual: validIncidencia.Recurso, Is.EqualTo(validRecurso));
+            Assert.That(actual: validIncidencia.Tipo, Is.EqualTo(validTipo));
+            Assert.That(actual: validIncidencia.Gravidade, Is.EqualTo(validGravidade));
+            Assert.That(actual: validIncidencia.Texto, Is.EqualTo(textoExemplo));
+            Assert.That(actual: validIncidencia.DataHoraCriacao, Is.GreaterThan(dateTimeBefore));
+            Assert.That(actual: validIncidencia.DataHoraCriacao, Is.LessThan(dateTimeAfter));
+            Assert.That(actual: validIncidencia.DataHoraAtualizacao, Is.GreaterThan(dateTimeBefore));
+            Assert.That(actual: validIncidencia.DataHoraAtualizacao, Is.LessThan(dateTimeAfter));
+            Assert.That(actual: validIncidencia.Inativo, Is.False);
         });
     }
 }
