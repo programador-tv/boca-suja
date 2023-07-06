@@ -9,7 +9,6 @@ namespace Tests.UnitTests.Web.Api.BocaSuja.HealthCheck;
 [TestFixture]
 public class DbHealhCheckTest
 {
-
     [Test, Category("WebApi - Health - DbHealthCheck")]
     [Description("Verifica se o teste de saúde do banco de dados está ocorrendo normalmente")]
     public void Check_HealthyDb()
@@ -25,12 +24,12 @@ public class DbHealhCheckTest
     {
         var services = new ServiceCollection();
 
-        services.AddDbContext<BocaSujaDbContext>(options =>
-                options.UseInMemoryDatabase(databaseName: "DbTeste"));
+        services.AddDbContext<BocaSujaDbContext>(
+            options => options.UseInMemoryDatabase(databaseName: "DbTeste")
+        );
 
         var serviceProvider = services.BuildServiceProvider();
 
         return serviceProvider;
     }
-
 }
