@@ -13,14 +13,15 @@ public class DbHealhCheckTest
     [Description("Verifica se o teste de saúde do banco de dados está ocorrendo normalmente")]
     public void Check_HealthyDb()
     {
+        var dbHealthCheck = new DbHealthCheck();
         var serviceProvider = CriarServiceProviderSaudavel();
 
-        bool result = DbHealthCheck.Check(serviceProvider);
+        bool result = dbHealthCheck.Check(serviceProvider);
 
         Assert.That(actual: result, Is.True);
     }
 
-    private IServiceProvider CriarServiceProviderSaudavel()
+    private static ServiceProvider CriarServiceProviderSaudavel()
     {
         var services = new ServiceCollection();
 

@@ -4,6 +4,7 @@ using Web.Api.BocaSuja.Context;
 using Web.Api.BocaSuja.HealthCheck;
 
 var builder = WebApplication.CreateBuilder(args);
+var dbHealth = new DbHealthCheck();
 
 builder.Services.AddDbContext<BocaSujaDbContext>(
     options => options.UseSqlServer(builder.Configuration.GetConnectionString("DbContext"))
@@ -11,7 +12,7 @@ builder.Services.AddDbContext<BocaSujaDbContext>(
 
 var app = builder.Build();
 
-DbHealthCheck.Check(app.Services);
+dbHealth.Check(app.Services);
 
 app.MapGet("/health", () => "OK");
 app.MapGet("/app/health", () => Health.Check());
