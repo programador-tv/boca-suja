@@ -1,8 +1,10 @@
 using Core.BocaSuja;
 using Microsoft.EntityFrameworkCore;
 using Web.Api.BocaSuja.Context;
+using Web.Api.BocaSuja.HealthCheck;
 
 var builder = WebApplication.CreateBuilder(args);
+var dbHealth = new DbHealthCheck();
 
 builder.Services.AddDbContext<BocaSujaDbContext>(
     options => options.UseSqlServer(builder.Configuration.GetConnectionString("DbContext"))
@@ -10,13 +12,7 @@ builder.Services.AddDbContext<BocaSujaDbContext>(
 
 var app = builder.Build();
 
-using (var scope = app.Services.CreateScope())
-{
-    var services = scope.ServiceProvider;
-
-    var context = services.GetRequiredService<BocaSujaDbContext>();
-    context.Database.EnsureCreated();
-}
+dbHealth.Check(app.Services);
 
 app.MapGet("/health", () => "OK");
 app.MapGet("/app/health", () => Health.Check());
