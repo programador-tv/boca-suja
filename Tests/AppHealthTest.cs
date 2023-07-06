@@ -10,6 +10,6 @@ public class Tests
     [Test]
     public void HealthAppShouldReturnOk()
     {
-        var response = Health.Check();
+        var response = Health.CHECK;
     }
 }
