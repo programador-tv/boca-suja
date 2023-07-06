@@ -22,3 +22,8 @@ services:
       - envs/sqlserver.env
     ports:
     - 1433:1433
+    volumes:
+      - sql-storage:/var/opt/mssql
+  
+volumes:
+  sql-storage:
