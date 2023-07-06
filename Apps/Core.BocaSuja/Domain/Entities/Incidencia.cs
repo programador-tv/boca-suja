@@ -17,7 +17,8 @@ public class Incidencia : EntidadeBase
         TipoDeIncidencia tipo,
         int gravidade,
         string texto
-    ) : base()
+    )
+        : base()
     {
         EntidadeOfensora = entidadeOfensora;
         Recurso = recurso;

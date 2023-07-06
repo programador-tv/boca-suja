@@ -6,7 +6,7 @@ public abstract class EntidadeBase
     public DateTimeOffset DataHoraCriacao { get; private set; }
     public DateTimeOffset DataHoraAtualizacao { get; private set; }
     public bool Inativo { get; private set; }
-    
+
     public EntidadeBase()
     {
         Id = Guid.NewGuid();
@@ -14,5 +14,4 @@ public abstract class EntidadeBase
         DataHoraAtualizacao = DateTimeOffset.Now;
         Inativo = false;
     }
-
 }
