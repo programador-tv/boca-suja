@@ -7,7 +7,7 @@ public abstract class EntidadeBase
     public DateTimeOffset DataHoraAtualizacao { get; private set; }
     public bool Inativo { get; private set; }
 
-    public EntidadeBase()
+    protected EntidadeBase()
     {
         Id = Guid.NewGuid();
         DataHoraCriacao = DateTimeOffset.Now;
