@@ -2,6 +2,7 @@ using Core.BocaSuja;
 using Core.BocaSuja.Domain.Interfaces;
 using Core.BocaSuja.Factories;
 using Core.BocaSuja.Models;
+using Core.BocaSuja.Services;
 using Microsoft.EntityFrameworkCore;
 using Web.Api.BocaSuja.Context;
 using Web.Api.BocaSuja.HealthCheck;

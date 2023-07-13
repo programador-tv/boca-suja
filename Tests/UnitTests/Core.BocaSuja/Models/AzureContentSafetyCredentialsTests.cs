@@ -24,9 +24,9 @@ namespace Core.BocaSuja.Tests.Models
             Assert.Multiple(() =>
             {
                 // Assert
-                Assert.That(credentials.URL, Is.EqualTo("https://example.com"));
-                Assert.That(credentials.SubscriptionKey, Is.EqualTo("subscription-key"));
-                Assert.That(credentials.Version, Is.EqualTo("v1"));
+                Assert.That(credentials.GetURL, Is.EqualTo("https://example.com"));
+                Assert.That(credentials.GetSubscriptionKey, Is.EqualTo("subscription-key"));
+                Assert.That(credentials.GetVersion, Is.EqualTo("v1"));
             });
         }
 

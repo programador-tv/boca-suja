@@ -1,4 +1,4 @@
-using Core.BocaSuja.Domain.Interfaces;
+using Core.BocaSuja.LLMContext;
 using Core.BocaSuja.Factories;
 using Core.BocaSuja.Models;
 using Microsoft.Extensions.Configuration;

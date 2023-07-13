@@ -1,5 +1,7 @@
 using Core.BocaSuja.Domain.Interfaces;
 
+namespace Core.BocaSuja.Services;
+
 public class TempService
 {
     private IGenericLlmContext _context;

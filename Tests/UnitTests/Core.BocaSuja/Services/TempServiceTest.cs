@@ -1,6 +1,7 @@
 using Core.BocaSuja.Domain.Interfaces;
 using Core.BocaSuja.Factories;
 using Core.BocaSuja.Models;
+using Core.BocaSuja.Services;
 using Microsoft.Extensions.Configuration;
 using Moq;
 

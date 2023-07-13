@@ -1,4 +1,5 @@
 using Core.BocaSuja.Domain.Interfaces;
+using Core.BocaSuja.LLMContext;
 using Core.BocaSuja.Models;
 
 namespace Core.BocaSuja.Factories;
