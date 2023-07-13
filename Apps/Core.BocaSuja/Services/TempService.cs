@@ -2,9 +2,9 @@ using Core.BocaSuja.Domain.Interfaces;
 
 public class TempService
 {
-    private IGenericLLMContext _context;
+    private IGenericLlmContext _context;
 
-    public TempService(IGenericLLMContext context)
+    public TempService(IGenericLlmContext context)
     {
         _context = context;
     }

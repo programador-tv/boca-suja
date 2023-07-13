@@ -5,7 +5,7 @@ namespace Core.BocaSuja.Factories;
 
 public static class LLMContextFactory
 {
-    public static IGenericLLMContext UseAzureContentSafety(
+    public static IGenericLlmContext UseAzureContentSafety(
         AzureContentSafetyCredentials credentials
     )
     {

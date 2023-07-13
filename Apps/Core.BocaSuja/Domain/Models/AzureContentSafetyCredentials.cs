@@ -4,9 +4,9 @@ using Microsoft.Extensions.Configuration;
 
 public class AzureContentSafetyCredentials
 {
-    public string URL;
-    public string SubscriptionKey;
-    public string Version;
+    private readonly string URL;
+    private readonly string SubscriptionKey;
+    private readonly string Version;
 
     public AzureContentSafetyCredentials(IConfiguration configuration)
     {
@@ -16,7 +16,8 @@ public class AzureContentSafetyCredentials
             ?? string.Empty;
 
         if (string.IsNullOrEmpty(AzureContentSafetyUrl))
-            throw new Exception(
+            throw new ArgumentNullException(
+                nameof(configuration),
                 "AzureContentSafetyUrl is not defined in appsettings.json or environment variables"
             );
 
@@ -26,7 +27,8 @@ public class AzureContentSafetyCredentials
             ?? string.Empty;
 
         if (string.IsNullOrEmpty(AzureContentSafetySubscriptionKey))
-            throw new Exception(
+            throw new ArgumentNullException(
+                nameof(configuration),
                 "AzureContentSafetySubscriptionKey is not defined in appsettings.json or environment variables"
             );
 
@@ -36,12 +38,28 @@ public class AzureContentSafetyCredentials
             ?? string.Empty;
 
         if (string.IsNullOrEmpty(AzureContentSafetyVersion))
-            throw new Exception(
+            throw new ArgumentNullException(
+                nameof(configuration),
                 "AzureContentSafetyVersion is not defined in appsettings.json or environment variables"
             );
 
         URL = AzureContentSafetyUrl;
         SubscriptionKey = AzureContentSafetySubscriptionKey;
         Version = AzureContentSafetyVersion;
+    }
+
+    public string GetURL()
+    {
+        return URL;
+    }
+
+    public string GetSubscriptionKey()
+    {
+        return SubscriptionKey;
+    }
+
+    public string GetVersion()
+    {
+        return Version;
     }
 }

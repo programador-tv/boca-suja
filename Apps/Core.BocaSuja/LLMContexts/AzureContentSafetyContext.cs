@@ -1,7 +1,7 @@
 using Core.BocaSuja.Domain.Interfaces;
 using Core.BocaSuja.Models;
 
-public class AzureContentSafetyContext : IGenericLLMContext
+public class AzureContentSafetyContext : IGenericLlmContext
 {
     private AzureContentSafetyCredentials _credentials;
 

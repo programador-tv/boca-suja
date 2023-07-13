@@ -37,7 +37,7 @@ namespace Core.BocaSuja.Tests.Models
             var configurationMock = new Mock<IConfiguration>();
 
             // Act & Assert
-            Assert.Throws<Exception>(
+            Assert.Throws<ArgumentNullException>(
                 () => new AzureContentSafetyCredentials(configurationMock.Object)
             );
         }
