@@ -2,5 +2,12 @@
 
 public class Health
 {
-    public static string Check() => "OK";
+    public const string CHECK = "OK";
+
+    protected Health() { }
+
+    public static string Check()
+    {
+        return CHECK;
+    }
 }
