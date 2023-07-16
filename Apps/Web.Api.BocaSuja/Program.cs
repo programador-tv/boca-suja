@@ -3,7 +3,6 @@ using Core.BocaSuja.Domain.Interfaces;
 using Core.BocaSuja.Domain.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 using Web.Api.BocaSuja.Context;
 using Web.Api.BocaSuja.HealthCheck;
 
@@ -27,9 +26,9 @@ app.MapGet(
     "/api/v1/validate",
     async (Guid? id, string? text, [FromServices] AzureContentSafetyService safetyService) =>
     {
-        if (id.HasValue && !text.IsNullOrEmpty())
+        if (id.HasValue && !string.IsNullOrEmpty(text))
         {
-            return Results.Ok(await safetyService.Validate(id.Value, text!));
+            return Results.Ok(await safetyService.Validate(id.Value, text));
         }
         else
         {
