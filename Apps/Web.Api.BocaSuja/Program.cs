@@ -1,7 +1,9 @@
 using Core.BocaSuja;
 using Core.BocaSuja.Domain.Interfaces;
 using Core.BocaSuja.Domain.Services;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Web.Api.BocaSuja.Context;
 using Web.Api.BocaSuja.HealthCheck;
 
@@ -22,9 +24,18 @@ app.MapGet("/health", () => "OK");
 app.MapGet("/app/health", () => Health.Check());
 
 app.MapGet(
-    "/api/v1/validate?id={id}&text={text}",
-    async (Guid id, String text, AzureContentSafetyService safetyService) =>
-        Results.Ok(await safetyService.Validate(id, text))
+    "/api/v1/validate",
+    async (Guid? id, string? text, [FromServices] AzureContentSafetyService safetyService) =>
+    {
+        if (id.HasValue && !text.IsNullOrEmpty())
+        {
+            return Results.Ok(await safetyService.Validate(id.Value, text!));
+        }
+        else
+        {
+            return Results.BadRequest("Missing 'id' or 'text' parameter.");
+        }
+    }
 );
 
 app.MapGet(
@@ -33,7 +44,7 @@ app.MapGet(
 );
 
 app.MapGet(
-    "/api/v1/rank?id={id}",
+    "/api/v1/rank/{id}",
     async (Guid id, AzureContentSafetyService safetyService) =>
         Results.Ok(await safetyService.Rank(id))
 );
