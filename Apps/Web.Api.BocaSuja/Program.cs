@@ -1,4 +1,5 @@
 using Core.BocaSuja;
+using Core.BocaSuja.Domain.Interfaces;
 using Core.BocaSuja.Domain.Services;
 using Microsoft.EntityFrameworkCore;
 using Web.Api.BocaSuja.Context;
@@ -10,6 +11,8 @@ var dbHealth = new DbHealthCheck();
 builder.Services.AddDbContext<BocaSujaDbContext>(
     options => options.UseSqlServer(builder.Configuration.GetConnectionString("DbContext"))
 );
+
+builder.Services.AddScoped<IContentSafetyService, AzureContentSafetyService>();
 
 var app = builder.Build();
 
