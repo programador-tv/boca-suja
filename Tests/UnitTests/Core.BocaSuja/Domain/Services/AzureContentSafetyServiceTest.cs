@@ -14,7 +14,8 @@ public class AzureContentSafetyServiceTest
         _contentSafetyService = new AzureContentSafetyService();
     }
 
-    [Test]
+    [Test, Category("Core - Domain - Services - AzureContentSafetyService")]
+    [Description("Não implementado")]
     public void Rank_ThrowsNotImplementedException()
     {
         async Task action() => await _contentSafetyService.Rank();
@@ -22,7 +23,8 @@ public class AzureContentSafetyServiceTest
         Assert.ThrowsAsync<NotImplementedException>(action);
     }
 
-    [Test]
+    [Test, Category("Core - Domain - Services - AzureContentSafetyService")]
+    [Description("Não implementado")]
     public void Rank_WithId_ThrowsNotImplementedException()
     {
         var id = Guid.NewGuid();
@@ -32,7 +34,8 @@ public class AzureContentSafetyServiceTest
         Assert.ThrowsAsync<NotImplementedException>(action);
     }
 
-    [Test]
+    [Test, Category("Core - Domain - Services - AzureContentSafetyService")]
+    [Description("Não implementado")]
     public void Validate_ThrowsNotImplementedException()
     {
         var id = Guid.NewGuid();

@@ -24,28 +24,56 @@ app.MapGet("/app/health", () => Health.Check());
 
 app.MapGet(
     "/api/v1/validate",
-    async (Guid? id, string? text, [FromServices] AzureContentSafetyService safetyService) =>
+    async (Guid? id, string? text, [FromServices] IContentSafetyService safetyService) =>
     {
         if (id.HasValue && !string.IsNullOrEmpty(text))
         {
-            return Results.Ok(await safetyService.Validate(id.Value, text));
+            try
+            {
+                return Results.Ok(await safetyService.Validate(id.Value, text));
+            }
+            catch (Exception ex)
+            {
+                return Results.Problem(detail: ex.Message, statusCode: 501);
+            }
         }
         else
         {
-            return Results.BadRequest("Missing 'id' or 'text' parameter.");
+            return Results.BadRequest(new BadHttpRequestException("'id' or 'text' parameter"));
         }
     }
 );
 
 app.MapGet(
     "/api/v1/rank",
-    async (AzureContentSafetyService safetyService) => Results.Ok(await safetyService.Rank())
+    async ([FromServices] IContentSafetyService safetyService) =>
+    {
+        try
+        {
+            return Results.Ok(await safetyService.Rank());
+        }
+        catch (Exception ex)
+        {
+            return Results.Problem(detail: ex.Message, statusCode: 501);
+        }
+    }
 );
 
 app.MapGet(
     "/api/v1/rank/{id}",
-    async (Guid id, AzureContentSafetyService safetyService) =>
-        Results.Ok(await safetyService.Rank(id))
+    async (Guid id, [FromServices] IContentSafetyService safetyService) =>
+    {
+        try
+        {
+            return Results.Ok(await safetyService.Rank(id));
+        }
+        catch (Exception ex)
+        {
+            return Results.Problem(detail: ex.Message, statusCode: 501);
+        }
+    }
 );
 
 app.Run();
+
+public partial class Program { }
