@@ -76,4 +76,4 @@ app.MapGet(
 
 app.Run();
 
-public static partial class Program { }
+public partial class Program { }
