@@ -52,4 +52,4 @@ projeto aberto que visa criar uma solução simples para gerenciar conteúdo de 
 ## 🤝 Contribuições
 Ainda estamos criando um passo a passo de como contribuir! De qualquer forma convido voçê a entrar no slack do programador.tv onde há um forum de discussão a respeito do projeto 
 
-- [Slack](https://join.slack.com/t/programadortv/shared_invite/zt-1xio6zmch-ExATgTVI808YsqY2IZdvjA)
+- [Slack]([https://join.slack.com/t/programadortv/shared_invite/zt-1xio6zmch-ExATgTVI808YsqY2IZdvjA](https://join.slack.com/t/programadortv/shared_invite/zt-1zfi7uzom-atVA8mJeIMF4pk4SEI1Ghw)https://join.slack.com/t/programadortv/shared_invite/zt-1zfi7uzom-atVA8mJeIMF4pk4SEI1Ghw)
