@@ -1,15 +1,17 @@
 ﻿using Core.BocaSuja.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Web.Api.BocaSuja.Context.DbMapping;
+namespace Core.BocaSuja.Infrastructure.Context.DbMapping;
 
 public class IncidenciaDbMapping
 {
     public void Build(ModelBuilder builder)
     {
-        builder.Entity<Incidencia>().ToTable("Incidencias");
+        builder.Entity<Incidencia>()
+          .ToTable("Incidencias");
 
-        builder.Entity<Incidencia>().HasKey(incidencia => incidencia.Id);
+        builder.Entity<Incidencia>()
+            .HasKey(incidencia => incidencia.Id);
 
         builder
             .Entity<Incidencia>()

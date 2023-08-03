@@ -18,8 +18,8 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="8.0.0-preview.5.23280.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="8.0.0-preview.5.23280.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="8.0.0-preview.6.23329.11" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="8.0.0-preview.6.23329.4" />
     <PackageReference Include="Moq" Version="4.18.4" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.7.0-preview-23364-03" />
     <PackageReference Include="NUnit" Version="3.13.3" />
@@ -34,6 +34,10 @@
   <ItemGroup>
     <ProjectReference Include="..\Apps\Core.BocaSuja\Core.BocaSuja.csproj" />
     <ProjectReference Include="..\Apps\Web.Api.BocaSuja\Web.Api.BocaSuja.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="UnitTests\Core.BocaSuja\Infrastructure\" />
   </ItemGroup>
 
 </Project>

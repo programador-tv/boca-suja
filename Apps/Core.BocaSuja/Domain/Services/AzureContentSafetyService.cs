@@ -1,5 +1,5 @@
 ﻿using Core.BocaSuja.Domain.Entities;
-using Core.BocaSuja.Domain.Interfaces;
+using Core.BocaSuja.Domain.Services.Interfaces;
 
 namespace Core.BocaSuja.Domain.Services;
 

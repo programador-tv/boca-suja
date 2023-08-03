@@ -1,9 +1,9 @@
 ﻿using Core.BocaSuja.Domain.Entities;
 using Core.BocaSuja.Domain.Enums;
+using Core.BocaSuja.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
-using Web.Api.BocaSuja.Context;
 
-namespace Tests.UnitTests.Web.Api.BocaSuja.Context;
+namespace Tests.UnitTests.Core.BocaSuja.Infrastructure.Context;
 
 [TestFixture]
 public class BocaSujaDbContextTest
