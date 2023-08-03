@@ -7,11 +7,9 @@ public class IncidenciaDbMapping
 {
     public void Build(ModelBuilder builder)
     {
-        builder.Entity<Incidencia>()
-          .ToTable("Incidencias");
+        builder.Entity<Incidencia>().ToTable("Incidencias");
 
-        builder.Entity<Incidencia>()
-            .HasKey(incidencia => incidencia.Id);
+        builder.Entity<Incidencia>().HasKey(incidencia => incidencia.Id);
 
         builder
             .Entity<Incidencia>()
