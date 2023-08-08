@@ -3,7 +3,7 @@ using Core.BocaSuja.Domain.Services.Interfaces;
 
 namespace Core.BocaSuja.Domain.Services;
 
-public class AzureContentSafetyService : IContentSafetyService
+public sealed class AzureContentSafetyService : IContentSafetyService
 {
     public Task<List<Incidencia>> Rank()
     {

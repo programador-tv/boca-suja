@@ -36,8 +36,4 @@
     <ProjectReference Include="..\Apps\Web.Api.BocaSuja\Web.Api.BocaSuja.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="UnitTests\Core.BocaSuja\Infrastructure\" />
-  </ItemGroup>
-
 </Project>

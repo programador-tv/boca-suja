@@ -3,7 +3,7 @@ using Core.BocaSuja.Domain.Enums;
 
 namespace Core.BocaSuja.Domain.Entities;
 
-public class Incidencia : EntidadeBase
+public sealed class Incidencia : EntidadeBase
 {
     public Guid EntidadeOfensora { get; private set; }
     public string Recurso { get; private set; }

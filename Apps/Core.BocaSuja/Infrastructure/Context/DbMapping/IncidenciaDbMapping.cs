@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Core.BocaSuja.Infrastructure.Context.DbMapping;
 
-public class IncidenciaDbMapping
+public sealed class IncidenciaDbMapping
 {
     public void Build(ModelBuilder builder)
     {
