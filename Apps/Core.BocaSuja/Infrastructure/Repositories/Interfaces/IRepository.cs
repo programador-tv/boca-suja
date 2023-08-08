@@ -3,7 +3,7 @@ using Core.BocaSuja.Domain.Params;
 
 namespace Core.BocaSuja.Infrastructure.Repositories.Interfaces;
 
-public interface IRepository<TEntity, TParams> 
+public interface IRepository<TEntity, TParams>
     where TEntity : EntidadeBase
     where TParams : IParams
 {
@@ -13,5 +13,4 @@ public interface IRepository<TEntity, TParams>
     Task Insert(TEntity obj);
     Task Update(Guid id, TParams @params);
     Task Delete(Guid id);
-    
 }

@@ -50,7 +50,7 @@ public class IncidenciaRepositoryTests
             TipoDeIncidencia.SELFHARM,
             5,
             "Texto teste 2"
-            );
+        );
 
         _dbContext.Incidencias.AddRange(incidencia1, incidencia2);
         await _dbContext.SaveChangesAsync();
@@ -88,14 +88,15 @@ public class IncidenciaRepositoryTests
             5,
             "Texto teste 2"
         );
-        
+
         _dbContext.Incidencias.AddRange(incidencia1, incidencia2);
         await _dbContext.SaveChangesAsync();
-        
+
         // Act
         var validResult = await _incidenciaRepository.Select(incidencia2.Id);
         var noResult = await _incidenciaRepository.Select(Guid.NewGuid());
-        
+
+        // Assert
         Assert.Multiple(() =>
         {
             Assert.That(validResult, Is.Not.Null);
@@ -107,12 +108,12 @@ public class IncidenciaRepositoryTests
     }
 
     [Test, Category("Core - Infrastructure - Repository - IncidenciaRepository")]
-    [TestCase("398A1F57-9B4D-45F6-85E1-8502BB6C349B", null, null, null, null )]
-    [TestCase(null, "Comentário em video", TipoDeIncidencia.SEXUAL, null, null )]
-    [TestCase("398A1F57-9B4D-45F6-85E1-8502BB6C349B", null, null, 5, null )]
-    [TestCase(null, null, null, 5, null )]
-    [TestCase(null, null, null, null, "teXto ExEMpLO" )]
-    [TestCase(null, "ComEntÁrIo eM ViDeo", null, null, null )]
+    [TestCase("398A1F57-9B4D-45F6-85E1-8502BB6C349B", null, null, null, null)]
+    [TestCase(null, "Comentário em video", TipoDeIncidencia.SEXUAL, null, null)]
+    [TestCase("398A1F57-9B4D-45F6-85E1-8502BB6C349B", null, null, 5, null)]
+    [TestCase(null, null, null, 5, null)]
+    [TestCase(null, null, null, null, "teXto ExEMpLO")]
+    [TestCase(null, "ComEntÁrIo eM ViDeo", null, null, null)]
     [Description("Verifica filtrar as incidencias por parâmetros")]
     public async Task SelectByParams_ShouldReturnByParams(
         string? entidadeOfensoraString,
@@ -130,7 +131,7 @@ public class IncidenciaRepositoryTests
             2,
             "Texto teste"
         );
-        
+
         var incidencia2 = new Incidencia(
             Guid.NewGuid(),
             "Comentário",
@@ -146,7 +147,7 @@ public class IncidenciaRepositoryTests
             5,
             "texto exemplo"
         );
-        
+
         var incidencia4 = new Incidencia(
             new Guid("398A1F57-9B4D-45F6-85E1-8502BB6C349B"),
             "Comentário em video",
@@ -157,26 +158,28 @@ public class IncidenciaRepositoryTests
 
         var incidenciaParams = new IncidenciaParams
         {
-            EntidadeOfensora = entidadeOfensoraString.IsNullOrEmpty() ? null : new Guid(entidadeOfensoraString!),
+            EntidadeOfensora = entidadeOfensoraString.IsNullOrEmpty()
+                ? null
+                : new Guid(entidadeOfensoraString!),
             Gravidade = gravidade ?? null,
             Texto = texto ?? null,
             Tipo = tipo ?? null,
             Recurso = recurso ?? null
         };
-        
+
         _dbContext.Incidencias.AddRange(incidencia1, incidencia2, incidencia3, incidencia4);
         await _dbContext.SaveChangesAsync();
-        
+
         //Act
         var result = await _incidenciaRepository.Select(incidenciaParams).ToListAsync();
-        
+
+        // Assert
         Assert.Multiple(() =>
         {
             Assert.That(result.Count(), Is.EqualTo(2));
             Assert.That(result.TrueForAll(x => x.Texto == incidencia3.Texto), Is.True);
         });
     }
-    
 
     [Test, Category("Core - Infrastructure - Repository - IncidenciaRepository")]
     [TestCase("Comentário em video", TipoDeIncidencia.SEXUAL, 0, "texto teste1")]
@@ -192,25 +195,21 @@ public class IncidenciaRepositoryTests
     )
     {
         // Arrange
-        var newIncidencia = new Incidencia(
-            Guid.NewGuid(),
-            recurso,
-            tipo,
-            gravidade,
-            texto
-        );
+        var newIncidencia = new Incidencia(Guid.NewGuid(), recurso, tipo, gravidade, texto);
 
         // Act
         await _incidenciaRepository.Insert(newIncidencia);
 
         // Assert
-        var result = await _dbContext.Incidencias.FirstOrDefaultAsync(i => i.Id == newIncidencia.Id);
-        
+        var result = await _dbContext.Incidencias.FirstOrDefaultAsync(
+            i => i.Id == newIncidencia.Id
+        );
+
         Assert.Multiple(() =>
         {
-            Assert.That(result, Is.Not.Null); 
+            Assert.That(result, Is.Not.Null);
             Assert.That(result!.Id, Is.EqualTo(newIncidencia.Id));
-            Assert.That(result!.EntidadeOfensora, Is.EqualTo(newIncidencia.EntidadeOfensora)); 
+            Assert.That(result!.EntidadeOfensora, Is.EqualTo(newIncidencia.EntidadeOfensora));
             Assert.That(result!.Gravidade, Is.EqualTo(newIncidencia.Gravidade));
             Assert.That(result!.Recurso, Is.EqualTo(newIncidencia.Recurso));
             Assert.That(result!.Texto, Is.EqualTo(newIncidencia.Texto));

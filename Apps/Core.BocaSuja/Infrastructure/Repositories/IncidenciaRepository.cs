@@ -18,11 +18,10 @@ public sealed class IncidenciaRepository : IIncidenciaRepository
     }
 
     // TODO: Talvez implementar paginação
-    public IQueryable<Incidencia> Select() => _db.Incidencias
-        .Where(x => x.Inativo == false);
-    
-    public async Task<Incidencia?> Select(Guid id) => await Select()
-        .FirstOrDefaultAsync(x => x.Id == id);
+    public IQueryable<Incidencia> Select() => _db.Incidencias.Where(x => x.Inativo == false);
+
+    public async Task<Incidencia?> Select(Guid id) =>
+        await Select().FirstOrDefaultAsync(x => x.Id == id);
 
     // TODO: Talvez implementar paginação e/ou outras regras
     public IQueryable<Incidencia> Select(IncidenciaParams? @params)
@@ -33,18 +32,23 @@ public sealed class IncidenciaRepository : IIncidenciaRepository
         {
             query = query
                 .WhereIf(@params.Id.HasValue, x => x.Id == @params.Id.Value)
-                .WhereIf(@params.EntidadeOfensora.HasValue, x => x.EntidadeOfensora == @params.EntidadeOfensora.Value)
+                .WhereIf(
+                    @params.EntidadeOfensora.HasValue,
+                    x => x.EntidadeOfensora == @params.EntidadeOfensora.Value
+                )
                 .WhereIf(@params.Inativo.HasValue, x => x.Inativo == @params.Inativo.Value)
                 .WhereIf(@params.Gravidade.HasValue, x => x.Gravidade == @params.Gravidade.Value)
                 .WhereIf(@params.Tipo.HasValue, x => x.Tipo == @params.Tipo.Value)
-
-                .WhereIf(!@params.Recurso.IsNullOrEmpty(), x => 
-                    x.Recurso.Equals(@params.Recurso, StringComparison.OrdinalIgnoreCase))
-                
-                .WhereIf(!@params.Texto.IsNullOrEmpty(), x => 
-                    x.Texto.Equals(@params.Texto, StringComparison.OrdinalIgnoreCase));
+                .WhereIf(
+                    !@params.Recurso.IsNullOrEmpty(),
+                    x => x.Recurso.Equals(@params.Recurso, StringComparison.OrdinalIgnoreCase)
+                )
+                .WhereIf(
+                    !@params.Texto.IsNullOrEmpty(),
+                    x => x.Texto.Equals(@params.Texto, StringComparison.OrdinalIgnoreCase)
+                );
         }
-        
+
         return query;
     }
 
@@ -55,7 +59,6 @@ public sealed class IncidenciaRepository : IIncidenciaRepository
             await _db.Incidencias.AddAsync(obj);
             await _db.SaveChangesAsync();
         }
-        
         // TODO: Exception Handler
         catch (Exception err)
         {
