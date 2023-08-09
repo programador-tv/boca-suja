@@ -31,14 +31,14 @@ public sealed class IncidenciaRepository : IIncidenciaRepository
         if (@params != null)
         {
             query = query
-                .WhereIf(@params.Id.HasValue, x => x.Id == @params.Id.Value)
+                .WhereIf(@params.Id.HasValue, x => x.Id == @params.Id!.Value)
                 .WhereIf(
                     @params.EntidadeOfensora.HasValue,
-                    x => x.EntidadeOfensora == @params.EntidadeOfensora.Value
+                    x => x.EntidadeOfensora == @params.EntidadeOfensora!.Value
                 )
-                .WhereIf(@params.Inativo.HasValue, x => x.Inativo == @params.Inativo.Value)
-                .WhereIf(@params.Gravidade.HasValue, x => x.Gravidade == @params.Gravidade.Value)
-                .WhereIf(@params.Tipo.HasValue, x => x.Tipo == @params.Tipo.Value)
+                .WhereIf(@params.Inativo.HasValue, x => x.Inativo == @params.Inativo!.Value)
+                .WhereIf(@params.Gravidade.HasValue, x => x.Gravidade == @params.Gravidade!.Value)
+                .WhereIf(@params.Tipo.HasValue, x => x.Tipo == @params.Tipo!.Value)
                 .WhereIf(
                     !@params.Recurso.IsNullOrEmpty(),
                     x => x.Recurso.Equals(@params.Recurso, StringComparison.OrdinalIgnoreCase)
