@@ -18,16 +18,7 @@ var app = builder.Build();
 
 dbHealth.Check(app.Services);
 
-app.MapGet("/health", () => "OK");
 app.MapGet("/app/health", () => Health.Check());
-app.MapGet(
-    "/app/temp",
-    () =>
-    {
-        var tempService = app.Services.GetService(typeof(TempService)) as TempService;
-        return tempService?.Check(Guid.NewGuid(), "Test");
-    }
-);
 
 app.MapGet(
     "/api/v1/validate",
