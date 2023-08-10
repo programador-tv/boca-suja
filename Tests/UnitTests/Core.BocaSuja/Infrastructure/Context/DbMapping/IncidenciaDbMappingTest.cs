@@ -1,8 +1,8 @@
 ﻿using Core.BocaSuja.Domain.Entities;
+using Core.BocaSuja.Infrastructure.Context.DbMapping;
 using Microsoft.EntityFrameworkCore;
-using Web.Api.BocaSuja.Context.DbMapping;
 
-namespace Tests.UnitTests.Web.Api.BocaSuja.Context.DbMapping;
+namespace Tests.UnitTests.Core.BocaSuja.Infrastructure.Context.DbMapping;
 
 [TestFixture]
 public class IncidenciaDbMappingTest

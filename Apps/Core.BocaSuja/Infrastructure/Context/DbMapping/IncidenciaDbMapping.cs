@@ -1,9 +1,9 @@
 ﻿using Core.BocaSuja.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Web.Api.BocaSuja.Context.DbMapping;
+namespace Core.BocaSuja.Infrastructure.Context.DbMapping;
 
-public class IncidenciaDbMapping
+public sealed class IncidenciaDbMapping
 {
     public void Build(ModelBuilder builder)
     {

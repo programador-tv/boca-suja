@@ -1,28 +1,16 @@
 using Core.BocaSuja;
-using Core.BocaSuja.Domain.Interfaces;
-using Core.BocaSuja.Factories;
-using Core.BocaSuja.Models;
+using Core.BocaSuja.Domain.Services.Interfaces;
+using Core.BocaSuja.Domain.Services;
+using Core.BocaSuja.Infrastructure.Context;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Web.Api.BocaSuja.Context;
 using Web.Api.BocaSuja.HealthCheck;
 
 var builder = WebApplication.CreateBuilder(args);
 var dbHealth = new DbHealthCheck();
+var dbString = builder.Configuration.GetConnectionString("DbContext");
 
-var connectionString =
-    Environment.GetEnvironmentVariable("DbContext")
-    ?? builder.Configuration.GetConnectionString("DbContext")
-    ?? string.Empty;
-
-builder.Services.AddDbContext<BocaSujaDbContext>(options => options.UseSqlServer(connectionString));
-
-builder.Services.AddSingleton(
-    LLMContextFactory.UseAzureContentSafety(
-        credentials: new AzureContentSafetyCredentials(builder.Configuration)
-    )
-);
-builder.Services.AddSingleton<TempService>();
+builder.Services.AddDbContext<BocaSujaDbContext>(options => options.UseSqlServer(dbString));
 
 builder.Services.AddScoped<IContentSafetyService, AzureContentSafetyService>();
 

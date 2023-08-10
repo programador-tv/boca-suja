@@ -1,4 +1,4 @@
-﻿using Core.BocaSuja.Domain.Interfaces;
+﻿using Core.BocaSuja.Domain.Services.Interfaces;
 using Core.BocaSuja.Domain.Services;
 
 namespace Tests.UnitTests.Core.BocaSuja.Domain.Services;
@@ -6,7 +6,7 @@ namespace Tests.UnitTests.Core.BocaSuja.Domain.Services;
 [TestFixture]
 public class AzureContentSafetyServiceTest
 {
-    private AzureContentSafetyService _contentSafetyService;
+    private IContentSafetyService _contentSafetyService;
 
     [SetUp]
     public void SetUp()
