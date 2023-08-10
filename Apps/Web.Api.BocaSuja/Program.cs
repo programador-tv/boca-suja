@@ -1,5 +1,6 @@
 using Core.BocaSuja;
 using Core.BocaSuja.Domain.Interfaces;
+using Core.BocaSuja.Domain.Services;
 using Core.BocaSuja.Factories;
 using Core.BocaSuja.Models;
 using Core.BocaSuja.Services;
@@ -24,9 +25,8 @@ builder.Services.AddSingleton(
         credentials: new AzureContentSafetyCredentials(builder.Configuration)
     )
 );
-builder.Services.AddSingleton<TempService>();
 
-builder.Services.AddScoped<IContentSafetyService, AzureContentSafetyService>();
+// builder.Services.AddScoped<IContentSafetyService, AzureContentSafetyService>();
 
 var app = builder.Build();
 
@@ -34,33 +34,23 @@ dbHealth.Check(app.Services);
 
 app.MapGet("/health", () => "OK");
 app.MapGet("/app/health", () => Health.Check());
-app.MapGet(
-    "/app/temp",
-    () =>
-    {
-        var tempService = app.Services.GetService(typeof(TempService)) as TempService;
-        return tempService?.Check(Guid.NewGuid(), "Test");
-    }
-);
+
 
 app.MapGet(
     "/api/v1/validate",
-    async (Guid? id, string? text, [FromServices] IContentSafetyService safetyService) =>
+    async (string id, string? text, [FromServices] IGenericLlmContext safetyService) =>
     {
-        if (id.HasValue && !string.IsNullOrEmpty(text))
+        if (string.IsNullOrEmpty(id) || string.IsNullOrEmpty(text))
         {
-            try
-            {
-                return Results.Ok(await safetyService.Validate(id.Value, text));
-            }
-            catch (Exception ex)
-            {
-                return Results.Problem(detail: ex.Message, statusCode: 501);
-            }
+            return Results.BadRequest(new BadHttpRequestException("'id' or 'text' parameter")); 
         }
-        else
+        try
         {
-            return Results.BadRequest(new BadHttpRequestException("'id' or 'text' parameter"));
+            return Results.Ok(await safetyService.Validate(id, text));
+        }
+        catch (Exception ex)
+        {
+            return Results.Problem(detail: ex.Message, statusCode: 501);
         }
     }
 );
