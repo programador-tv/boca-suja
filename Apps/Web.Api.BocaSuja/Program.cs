@@ -21,6 +21,7 @@ dbHealth.Check(app.Services);
 app.MapGet("/health", () => "OK");
 app.MapGet("/app/health", () => Health.Check());
 
+
 app.MapGet(
     "/api/v1/validate",
     async (Guid? id, string? text, [FromServices] IContentSafetyService safetyService) =>
