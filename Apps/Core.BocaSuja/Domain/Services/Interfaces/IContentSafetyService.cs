@@ -1,6 +1,6 @@
 ﻿using Core.BocaSuja.Domain.Entities;
 
-namespace Core.BocaSuja.Domain.Interfaces;
+namespace Core.BocaSuja.Domain.Services.Interfaces;
 
 public interface IContentSafetyService
 {

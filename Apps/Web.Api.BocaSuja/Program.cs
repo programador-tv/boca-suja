@@ -4,14 +4,14 @@ using Core.BocaSuja.Domain.Services;
 using Core.BocaSuja.Factories;
 using Core.BocaSuja.Models;
 using Core.BocaSuja.Services;
-using Core.BocaSuja.Domain.Services;
+using Core.BocaSuja.Infrastructure.Context;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Web.Api.BocaSuja.Context;
 using Web.Api.BocaSuja.HealthCheck;
 
 var builder = WebApplication.CreateBuilder(args);
 var dbHealth = new DbHealthCheck();
+var dbString = builder.Configuration.GetConnectionString("DbContext");
 
 var connectionString =
     Environment.GetEnvironmentVariable("DbContext")
@@ -32,9 +32,7 @@ var app = builder.Build();
 
 dbHealth.Check(app.Services);
 
-app.MapGet("/health", () => "OK");
 app.MapGet("/app/health", () => Health.Check());
-
 
 app.MapGet(
     "/api/v1/validate",

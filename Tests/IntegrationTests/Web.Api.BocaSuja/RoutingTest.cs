@@ -27,7 +27,7 @@ public class IntegrationTests
     [Description("Verifica endpoint de health")]
     public async Task HealthEndpoint_ShouldReturnOk()
     {
-        var endpoint = "/health";
+        var endpoint = "app/health";
 
         var response = await _client.GetAsync(endpoint);
 

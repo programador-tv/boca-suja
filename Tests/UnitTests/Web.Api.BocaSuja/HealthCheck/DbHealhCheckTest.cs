@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Moq;
-using Web.Api.BocaSuja.Context;
+using Core.BocaSuja.Infrastructure.Context;
 using Web.Api.BocaSuja.HealthCheck;
 
 namespace Tests.UnitTests.Web.Api.BocaSuja.HealthCheck;

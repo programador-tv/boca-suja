@@ -1,13 +1,13 @@
 ﻿using System.Net.Http.Json;
 using System.Text;
 using Newtonsoft.Json;
-using Core.BocaSuja.Domain.Entities;
-using Core.BocaSuja.Domain.Interfaces;
+﻿using Core.BocaSuja.Domain.Entities;
+using Core.BocaSuja.Domain.Services.Interfaces;
 using Core.BocaSuja.Models;
 
 namespace Core.BocaSuja.Domain.Services;
 
-public class AzureContentSafetyService
+public sealed class AzureContentSafetyService : IContentSafetyService
 {
     
     public static async Task<ContentSafetyResult> CallAPI(

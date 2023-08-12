@@ -1,5 +1,5 @@
-﻿using Core.BocaSuja;
-using Web.Api.BocaSuja.Context;
+﻿using Core.BocaSuja.Infrastructure.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace Web.Api.BocaSuja.HealthCheck;
 
