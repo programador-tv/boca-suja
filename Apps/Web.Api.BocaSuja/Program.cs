@@ -3,7 +3,6 @@ using Core.BocaSuja.Domain.Interfaces;
 using Core.BocaSuja.Domain.Services;
 using Core.BocaSuja.Factories;
 using Core.BocaSuja.Models;
-using Core.BocaSuja.Services;
 using Core.BocaSuja.Infrastructure.Context;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -40,7 +39,7 @@ app.MapGet(
     {
         if (string.IsNullOrEmpty(id) || string.IsNullOrEmpty(text))
         {
-            return Results.BadRequest(new BadHttpRequestException("'id' or 'text' parameter")); 
+            return Results.BadRequest(new BadHttpRequestException("'id' or 'text' parameter"));
         }
         try
         {
@@ -55,31 +54,29 @@ app.MapGet(
 
 app.MapGet(
     "/api/v1/rank",
-    async ([FromServices] IContentSafetyService safetyService) =>
-    {
-        try
-        {
-            return Results.Ok(await safetyService.Rank());
-        }
-        catch (Exception ex)
-        {
-            return Results.Problem(detail: ex.Message, statusCode: 501);
-        }
+    async ([FromServices] BocaSujaDbContext _context) => {
+        // try
+        // {
+        //     return Results.Ok(await safetyService.Rank());
+        // }
+        // catch (Exception ex)
+        // {
+        //     return Results.Problem(detail: ex.Message, statusCode: 501);
+        // }
     }
 );
 
 app.MapGet(
     "/api/v1/rank/{id}",
-    async (Guid id, [FromServices] IContentSafetyService safetyService) =>
-    {
-        try
-        {
-            return Results.Ok(await safetyService.Rank(id));
-        }
-        catch (Exception ex)
-        {
-            return Results.Problem(detail: ex.Message, statusCode: 501);
-        }
+    async (Guid id, [FromServices] BocaSujaDbContext _context) => {
+        // try
+        // {
+        //     return Results.Ok(await safetyService.Rank(id));
+        // }
+        // catch (Exception ex)
+        // {
+        //     return Results.Problem(detail: ex.Message, statusCode: 501);
+        // }
     }
 );
 

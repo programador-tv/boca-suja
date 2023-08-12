@@ -1,4 +1,5 @@
 namespace Core.BocaSuja.Models;
+
 public class ContentSafetyResult
 {
     public List<BlocklistMatchResult> BlocklistsMatchResults { get; set; }
