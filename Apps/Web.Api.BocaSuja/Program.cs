@@ -1,6 +1,8 @@
 using Core.BocaSuja;
-using Core.BocaSuja.Domain.Services.Interfaces;
+using Core.BocaSuja.Domain.Interfaces;
 using Core.BocaSuja.Domain.Services;
+using Core.BocaSuja.Factories;
+using Core.BocaSuja.Models;
 using Core.BocaSuja.Infrastructure.Context;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -10,9 +12,20 @@ var builder = WebApplication.CreateBuilder(args);
 var dbHealth = new DbHealthCheck();
 var dbString = builder.Configuration.GetConnectionString("DbContext");
 
-builder.Services.AddDbContext<BocaSujaDbContext>(options => options.UseSqlServer(dbString));
+var connectionString =
+    Environment.GetEnvironmentVariable("DbContext")
+    ?? builder.Configuration.GetConnectionString("DbContext")
+    ?? string.Empty;
 
-builder.Services.AddScoped<IContentSafetyService, AzureContentSafetyService>();
+builder.Services.AddDbContext<BocaSujaDbContext>(options => options.UseSqlServer(connectionString));
+
+builder.Services.AddSingleton(
+    LLMContextFactory.UseAzureContentSafety(
+        credentials: new AzureContentSafetyCredentials(builder.Configuration)
+    )
+);
+
+// builder.Services.AddScoped<IContentSafetyService, AzureContentSafetyService>();
 
 var app = builder.Build();
 
@@ -22,53 +35,48 @@ app.MapGet("/app/health", () => Health.Check());
 
 app.MapGet(
     "/api/v1/validate",
-    async (Guid? id, string? text, [FromServices] IContentSafetyService safetyService) =>
+    async (string id, string? text, [FromServices] IGenericLlmContext safetyService) =>
     {
-        if (id.HasValue && !string.IsNullOrEmpty(text))
-        {
-            try
-            {
-                return Results.Ok(await safetyService.Validate(id.Value, text));
-            }
-            catch (Exception ex)
-            {
-                return Results.Problem(detail: ex.Message, statusCode: 501);
-            }
-        }
-        else
+        if (string.IsNullOrEmpty(id) || string.IsNullOrEmpty(text))
         {
             return Results.BadRequest(new BadHttpRequestException("'id' or 'text' parameter"));
+        }
+        try
+        {
+            return Results.Ok(await safetyService.Validate(id, text));
+        }
+        catch (Exception ex)
+        {
+            return Results.Problem(detail: ex.Message, statusCode: 501);
         }
     }
 );
 
 app.MapGet(
     "/api/v1/rank",
-    async ([FromServices] IContentSafetyService safetyService) =>
-    {
-        try
-        {
-            return Results.Ok(await safetyService.Rank());
-        }
-        catch (Exception ex)
-        {
-            return Results.Problem(detail: ex.Message, statusCode: 501);
-        }
+    async ([FromServices] BocaSujaDbContext _context) => {
+        // try
+        // {
+        //     return Results.Ok(await safetyService.Rank());
+        // }
+        // catch (Exception ex)
+        // {
+        //     return Results.Problem(detail: ex.Message, statusCode: 501);
+        // }
     }
 );
 
 app.MapGet(
     "/api/v1/rank/{id}",
-    async (Guid id, [FromServices] IContentSafetyService safetyService) =>
-    {
-        try
-        {
-            return Results.Ok(await safetyService.Rank(id));
-        }
-        catch (Exception ex)
-        {
-            return Results.Problem(detail: ex.Message, statusCode: 501);
-        }
+    async (Guid id, [FromServices] BocaSujaDbContext _context) => {
+        // try
+        // {
+        //     return Results.Ok(await safetyService.Rank(id));
+        // }
+        // catch (Exception ex)
+        // {
+        //     return Results.Problem(detail: ex.Message, statusCode: 501);
+        // }
     }
 );
 

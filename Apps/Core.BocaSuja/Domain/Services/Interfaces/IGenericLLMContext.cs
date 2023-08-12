@@ -2,5 +2,5 @@ namespace Core.BocaSuja.Domain.Interfaces;
 
 public interface IGenericLlmContext
 {
-    public bool Validate(Guid Id, string Text);
+    public Task<bool> Validate(string Id, string Text);
 }
