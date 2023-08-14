@@ -66,6 +66,20 @@ public sealed class IncidenciaRepository : IIncidenciaRepository
         }
     }
 
+    public async Task InsertMany(IEnumerable<Incidencia> objs)
+    {
+        try
+        {
+            await _db.Incidencias.AddRangeAsync(objs);
+            await _db.SaveChangesAsync();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
+        }
+    }
+
     public Task Update(Guid id, IncidenciaParams obj)
     {
         // TODO: Implementar Update

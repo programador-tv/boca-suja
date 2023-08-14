@@ -11,6 +11,7 @@ public interface IRepository<TEntity, TParams>
     IQueryable<TEntity> Select();
     Task<TEntity?> Select(Guid id);
     Task Insert(TEntity obj);
+    Task InsertMany(IEnumerable<TEntity> objs);
     Task Update(Guid id, TParams @params);
     Task Delete(Guid id);
 }

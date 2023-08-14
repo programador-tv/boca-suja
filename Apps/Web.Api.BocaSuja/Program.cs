@@ -1,29 +1,43 @@
 using Core.BocaSuja;
 using Core.BocaSuja.Domain.Interfaces;
-using Core.BocaSuja.Domain.Services;
 using Core.BocaSuja.Factories;
 using Core.BocaSuja.Models;
 using Core.BocaSuja.Infrastructure.Context;
+using Core.BocaSuja.Infrastructure.Repositories;
+using Core.BocaSuja.Infrastructure.Repositories.Interfaces;
+using Core.BocaSuja.LLMContext;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Web.Api.BocaSuja.HealthCheck;
 
 var builder = WebApplication.CreateBuilder(args);
 var dbHealth = new DbHealthCheck();
-var dbString = builder.Configuration.GetConnectionString("DbContext");
 
 var connectionString =
     Environment.GetEnvironmentVariable("DbContext")
     ?? builder.Configuration.GetConnectionString("DbContext")
     ?? string.Empty;
 
-builder.Services.AddDbContext<BocaSujaDbContext>(options => options.UseSqlServer(connectionString));
-
-builder.Services.AddSingleton(
-    LLMContextFactory.UseAzureContentSafety(
-        credentials: new AzureContentSafetyCredentials(builder.Configuration)
-    )
+builder.Services.AddDbContext<BocaSujaDbContext>(
+    options => options.UseSqlServer(connectionString, b => b.MigrationsAssembly("Web.Api.BocaSuja"))
 );
+
+builder.Services.AddScoped<IEntidadeOfensoraRepository, EntidadeOfensoraRepository>();
+builder.Services.AddScoped<IIncidenciaRepository, IncidenciaRepository>();
+
+builder.Services.AddScoped<IGenericLlmContext, AzureContentSafetyContext>(serviceProvider =>
+{
+    var entidadeOfensoraRepo = serviceProvider.GetRequiredService<IEntidadeOfensoraRepository>();
+    var incidenciaRepo = serviceProvider.GetRequiredService<IIncidenciaRepository>();
+
+    return (
+        LLMContextFactory.UseAzureContentSafety(
+            credentials: new AzureContentSafetyCredentials(builder.Configuration),
+            entidadeOfensoraRepository: entidadeOfensoraRepo!,
+            incidenciaRepository: incidenciaRepo!
+        ) as AzureContentSafetyContext
+    )!;
+});
 
 // builder.Services.AddScoped<IContentSafetyService, AzureContentSafetyService>();
 
@@ -35,7 +49,7 @@ app.MapGet("/app/health", () => Health.Check());
 
 app.MapGet(
     "/api/v1/validate",
-    async (string id, string? text, [FromServices] IGenericLlmContext safetyService) =>
+    async (string id, string? text, IGenericLlmContext safetyService) =>
     {
         if (string.IsNullOrEmpty(id) || string.IsNullOrEmpty(text))
         {
