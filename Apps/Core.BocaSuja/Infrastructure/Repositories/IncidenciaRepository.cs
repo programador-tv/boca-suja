@@ -65,7 +65,7 @@ public sealed class IncidenciaRepository : IIncidenciaRepository
             throw new Exception(err.Message);
         }
     }
-    
+
     public async Task InsertMany(IEnumerable<Incidencia> objs)
     {
         try

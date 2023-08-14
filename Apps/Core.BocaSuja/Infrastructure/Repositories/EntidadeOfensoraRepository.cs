@@ -13,10 +13,11 @@ public class EntidadeOfensoraRepository : IEntidadeOfensoraRepository
     {
         _db = db;
     }
-    
-    public async Task<EntidadeOfensora?> Select(string apelido) => 
-        await _db.EntidadeOfensoras.FirstOrDefaultAsync(x => 
-            x.Inativo == false && x.ApelidoEntidade == apelido);
+
+    public async Task<EntidadeOfensora?> Select(string apelido) =>
+        await _db.EntidadeOfensoras.FirstOrDefaultAsync(
+            x => x.Inativo == false && x.ApelidoEntidade == apelido
+        );
 
     public async Task Insert(EntidadeOfensora obj)
     {
@@ -31,5 +32,4 @@ public class EntidadeOfensoraRepository : IEntidadeOfensoraRepository
             throw new Exception(err.Message);
         }
     }
-
 }

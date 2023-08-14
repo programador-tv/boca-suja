@@ -18,9 +18,9 @@ var connectionString =
     ?? builder.Configuration.GetConnectionString("DbContext")
     ?? string.Empty;
 
-builder.Services.AddDbContext<BocaSujaDbContext>(options => 
-    options.UseSqlServer(connectionString, 
-        b => b.MigrationsAssembly("Web.Api.BocaSuja")));
+builder.Services.AddDbContext<BocaSujaDbContext>(
+    options => options.UseSqlServer(connectionString, b => b.MigrationsAssembly("Web.Api.BocaSuja"))
+);
 
 builder.Services.AddScoped<IEntidadeOfensoraRepository, EntidadeOfensoraRepository>();
 builder.Services.AddScoped<IIncidenciaRepository, IncidenciaRepository>();
@@ -29,12 +29,14 @@ builder.Services.AddScoped<IGenericLlmContext, AzureContentSafetyContext>(servic
 {
     var entidadeOfensoraRepo = serviceProvider.GetRequiredService<IEntidadeOfensoraRepository>();
     var incidenciaRepo = serviceProvider.GetRequiredService<IIncidenciaRepository>();
-    
-    return (LLMContextFactory.UseAzureContentSafety(
-        credentials: new AzureContentSafetyCredentials(builder.Configuration),
-        entidadeOfensoraRepository: entidadeOfensoraRepo!,
-        incidenciaRepository: incidenciaRepo!
-    ) as AzureContentSafetyContext)!;
+
+    return (
+        LLMContextFactory.UseAzureContentSafety(
+            credentials: new AzureContentSafetyCredentials(builder.Configuration),
+            entidadeOfensoraRepository: entidadeOfensoraRepo!,
+            incidenciaRepository: incidenciaRepo!
+        ) as AzureContentSafetyContext
+    )!;
 });
 
 // builder.Services.AddScoped<IContentSafetyService, AzureContentSafetyService>();

@@ -11,11 +11,12 @@ public static class LLMContextFactory
         AzureContentSafetyCredentials credentials,
         IEntidadeOfensoraRepository entidadeOfensoraRepository,
         IIncidenciaRepository incidenciaRepository
-        )
+    )
     {
         return new AzureContentSafetyContext(
-            credentials, 
-            entidadeOfensoraRepository, 
-            incidenciaRepository);
+            credentials,
+            entidadeOfensoraRepository,
+            incidenciaRepository
+        );
     }
 }

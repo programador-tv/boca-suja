@@ -17,19 +17,17 @@ public sealed class EntidadeOfensoraDbMapping
             .HasColumnOrder(0)
             .HasComment("Identificador Guid da entidade ofensora.")
             .IsRequired(true);
-        
+
         builder
             .Entity<EntidadeOfensora>()
             .Property(entidade => entidade.ApelidoEntidade)
             .HasColumnOrder(1)
             .HasColumnName("Apelido_Entidade")
-            .HasComment(
-                "Indica o alias/apelido da entidade."
-            )
+            .HasComment("Indica o alias/apelido da entidade.")
             .IsRequired(true);
 
         builder.Entity<EntidadeOfensora>().HasIndex(entidade => entidade.ApelidoEntidade);
-        
+
         builder
             .Entity<EntidadeOfensora>()
             .Property(entidade => entidade.DataHoraCriacao)
@@ -67,6 +65,5 @@ public sealed class EntidadeOfensoraDbMapping
             .HasColumnType("bit")
             .HasDefaultValue(false)
             .IsRequired();
-
     }
 }

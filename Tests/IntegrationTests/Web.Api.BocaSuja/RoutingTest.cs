@@ -44,7 +44,7 @@ public class IntegrationTests
 
         var response = await _client.GetAsync(endpoint);
 
-        Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.NotImplemented));
+        Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
     }
 
     [Test, Category("WebApi - Routing - Validate")]
@@ -73,7 +73,7 @@ public class IntegrationTests
 
         var response = await _client.GetAsync(endpoint);
 
-        Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.NotImplemented));
+        Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
     }
 
     [Test, Category("WebApi - Routing - Rank")]
@@ -85,6 +85,6 @@ public class IntegrationTests
 
         var response = await _client.GetAsync(endpoint);
 
-        Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.NotImplemented));
+        Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
     }
 }

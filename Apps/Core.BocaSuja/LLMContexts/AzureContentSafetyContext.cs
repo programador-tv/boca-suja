@@ -13,7 +13,7 @@ public class AzureContentSafetyContext : IGenericLlmContext
     private AzureContentSafetyCredentials _credentials;
     private IEntidadeOfensoraRepository _entidadeOfensoraRepo;
     private IIncidenciaRepository _incidenciaRepository;
-    
+
     private const int LIMIT_UNIT = 4;
     private const int LIMIT_SUM = 4;
 
@@ -45,11 +45,7 @@ public class AzureContentSafetyContext : IGenericLlmContext
             >= LIMIT_SUM;
     }
 
-
-    public async Task<bool> Validate(
-        string Id, 
-        string Text
-        )
+    public async Task<bool> Validate(string Id, string Text)
     {
         var result = await AzureContentSafetyService.CallAPI(
             Text,
@@ -59,7 +55,7 @@ public class AzureContentSafetyContext : IGenericLlmContext
         );
 
         var entidadeOfensora = await _entidadeOfensoraRepo.Select(Id);
-        
+
         if (entidadeOfensora is null)
         {
             entidadeOfensora = new EntidadeOfensora(Id);
@@ -68,20 +64,23 @@ public class AzureContentSafetyContext : IGenericLlmContext
 
         var gravitiesFromType = GetGravitiesFromType(result);
 
-        var incidencias = gravitiesFromType.Select(typeAndGravity => new Incidencia(
-            entidadeOfensora.Id,
-            "",
-            typeAndGravity.Key,
-            typeAndGravity.Value,
-            Text
-        ));
+        var incidencias = gravitiesFromType.Select(
+            typeAndGravity =>
+                new Incidencia(
+                    entidadeOfensora.Id,
+                    "",
+                    typeAndGravity.Key,
+                    typeAndGravity.Value,
+                    Text
+                )
+        );
 
         await _incidenciaRepository.InsertMany(incidencias);
 
         return !ViolateUnitLimit(result) && !ViolateSumLimit(result);
     }
 
-    private Dictionary<TipoDeIncidencia, int> GetGravitiesFromType(ContentSafetyResult result) => 
+    private Dictionary<TipoDeIncidencia, int> GetGravitiesFromType(ContentSafetyResult result) =>
         new Dictionary<TipoDeIncidencia, int>()
         {
             { TipoDeIncidencia.HATE, result.HateResult.Severity },
@@ -89,5 +88,4 @@ public class AzureContentSafetyContext : IGenericLlmContext
             { TipoDeIncidencia.SELFHARM, result.SelfHarmResult.Severity },
             { TipoDeIncidencia.VIOLENCE, result.ViolenceResult.Severity },
         };
-    
 }

@@ -6,7 +6,8 @@ public class EntidadeOfensora : EntidadeBase
 {
     public string ApelidoEntidade { get; private set; }
 
-    public EntidadeOfensora(string apelidoEntidade) : base()
+    public EntidadeOfensora(string apelidoEntidade)
+        : base()
     {
         ApelidoEntidade = apelidoEntidade;
     }
