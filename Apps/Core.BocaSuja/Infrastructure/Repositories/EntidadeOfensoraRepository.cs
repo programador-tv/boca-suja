@@ -8,6 +8,11 @@ namespace Core.BocaSuja.Infrastructure.Repositories;
 public class EntidadeOfensoraRepository : IEntidadeOfensoraRepository
 {
     private readonly BocaSujaDbContext _db;
+
+    public EntidadeOfensoraRepository(BocaSujaDbContext db)
+    {
+        _db = db;
+    }
     
     public async Task<EntidadeOfensora?> Select(string apelido) => 
         await _db.EntidadeOfensoras.FirstOrDefaultAsync(x => 

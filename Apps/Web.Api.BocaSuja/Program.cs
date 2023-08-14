@@ -25,15 +25,15 @@ builder.Services.AddDbContext<BocaSujaDbContext>(options =>
 builder.Services.AddScoped<IEntidadeOfensoraRepository, EntidadeOfensoraRepository>();
 builder.Services.AddScoped<IIncidenciaRepository, IncidenciaRepository>();
 
-builder.Services.AddSingleton<AzureContentSafetyContext>(serviceProvider =>
+builder.Services.AddScoped<IGenericLlmContext, AzureContentSafetyContext>(serviceProvider =>
 {
     var entidadeOfensoraRepo = serviceProvider.GetRequiredService<IEntidadeOfensoraRepository>();
     var incidenciaRepo = serviceProvider.GetRequiredService<IIncidenciaRepository>();
     
     return (LLMContextFactory.UseAzureContentSafety(
         credentials: new AzureContentSafetyCredentials(builder.Configuration),
-        entidadeOfensoraRepository: entidadeOfensoraRepo,
-        incidenciaRepository: incidenciaRepo
+        entidadeOfensoraRepository: entidadeOfensoraRepo!,
+        incidenciaRepository: incidenciaRepo!
     ) as AzureContentSafetyContext)!;
 });
 
@@ -47,7 +47,7 @@ app.MapGet("/app/health", () => Health.Check());
 
 app.MapGet(
     "/api/v1/validate",
-    async (string id, string? text, [FromServices] AzureContentSafetyContext safetyService) =>
+    async (string id, string? text, IGenericLlmContext safetyService) =>
     {
         if (string.IsNullOrEmpty(id) || string.IsNullOrEmpty(text))
         {
